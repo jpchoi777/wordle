@@ -1,6 +1,6 @@
 let index = 0;
 let attempts = 0;
-const corect = "APPLE";
+// const corect = "APPLE";
 let timer;
 
 function appStart() {
@@ -30,8 +30,15 @@ function appStart() {
     if (index !== 0) index--;
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     let corectCount = 0;
+    const recvData = await fetch("/answer");
+    console.log("answer=", recvData);
+    const corect = await recvData.json();
+    // console.log("corectData=", corectData);
+    // const corect = corectData.answer;
+    // console.log("corect=", corect);
+
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-colume[data-index='${attempts}${i}']`
